@@ -31,7 +31,7 @@ const SignIn = () => {
                     <nav className="navbar navbar-expand-lg blur border-radius-xl top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
                         <div className="container-fluid ps-2 pe-0">
                             <a className="navbar-brand font-weight-bolder ms-lg-0 ms-3" href="/dashboard">
-                                Danh-Lương 20 TD Dashboard
+                                Danh-Lương 20TD Dashboard
                             </a>
                             <button className="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                                 <span className="navbar-toggler-icon mt-2">
@@ -73,7 +73,7 @@ const SignIn = () => {
                 </div>
             </div>
             <main className="main-content mt-0">
-                <div className="page-header align-items-start min-vh-100">
+                <div className="page-header align-items-start min-vh-100" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80')" }}>
                     <span className="mask bg-gradient-dark opacity-6"></span>
                     <div className="container my-auto">
                         <div className="row">
@@ -147,7 +147,7 @@ const SignIn = () => {
                                 <div className="col-12 col-md-6 my-auto">
                                     <div className="copyright text-center text-sm text-white text-lg-start">
                                         © {new Date().getFullYear()}, made with <i className="fa fa-heart" aria-hidden="true"></i> by
-                                        <a href="https://www.creative-tim.com" className="font-weight-bold text-white" target="_blank" rel="noreferrer">Creative Tim</a> for a better web.
+                                        <a href="https://www.creative-tim.com" className="font-weight-bold text-white" target="_blank" rel="noreferrer">Danh-Lương 20TD</a> for a better web.
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-6">
