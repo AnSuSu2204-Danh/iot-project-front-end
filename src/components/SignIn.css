@@ -1,0 +1,61 @@
+/* src/components/SignIn.css */
+
+body {
+    background-image: url('/assets/img/bg-pricing.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-scroller {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.page-body-wrapper {
+    flex: 1;
+    display: flex;
+}
+
+.full-page-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+}
+
+.login-bg {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.form-control {
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.btn {
+    border-radius: 0.5rem;
+}
+
+.alert {
+    margin-top: 1rem;
+}
