@@ -1,10 +1,6 @@
 body {
     background-color: #f8f9fa;
     background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .page-header {
