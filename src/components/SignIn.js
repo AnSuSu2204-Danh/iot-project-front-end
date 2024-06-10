@@ -147,13 +147,13 @@ const SignIn = () => {
                                 <div className="col-12 col-md-6 my-auto">
                                     <div className="copyright text-center text-sm text-white text-lg-start">
                                         © {new Date().getFullYear()}, made with <i className="fa fa-heart" aria-hidden="true"></i> by
-                                        <a href="https://www.creative-tim.com" className="font-weight-bold text-white" target="_blank" rel="noreferrer">Danh-Lương 20TD</a> for a better web.
+                                        <a href="https://www.creative-tim.com" className="font-weight-bold text-white" target="_blank" rel="noreferrer">Creative Tim</a> for a better web.
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <ul className="nav nav-footer justify-content-center justify-content-lg-end">
                                         <li className="nav-item">
-                                            <a href="https://www.facebook.com/AnSuSu2002/" className="nav-link text-white" target="_blank" rel="noreferrer">Danh-Lương 20TD</a>
+                                            <a href="https://www.facebook.com/AnSuSu2002/" className="nav-link text-white" target="_blank" rel="noreferrer">Creative Tim</a>
                                         </li>
                                         <li className="nav-item">
                                             <a href="https://www.facebook.com/AnSuSu2002/" className="nav-link text-white" target="_blank" rel="noreferrer">About Us</a>
