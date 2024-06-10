@@ -1,16 +1,15 @@
 body {
     background-color: #f8f9fa;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .page-header {
     background-size: cover;
     background-position: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    
 }
 
 .mask {
