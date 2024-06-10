@@ -1,6 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
 
 function Dashboard() {
   const [data, setData] = useState([]);
