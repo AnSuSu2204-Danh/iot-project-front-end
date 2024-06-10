@@ -15,17 +15,23 @@ const SignIn = () => {
       localStorage.setItem('token', response.data.token);
       history.push('/dashboard');
     } catch (error) {
-      console.error('Lỗi đăng nhập:', error);
+      console.error('Error signing in:', error);
     }
   };
 
   return (
     <div className="container">
+      <h2>Sign In</h2>
       <form onSubmit={handleSubmit}>
-        <h2>Đăng Nhập</h2>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Mật khẩu" required />
-        <button type="submit">Đăng Nhập</button>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">Email</label>
+          <input type="email" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">Password</label>
+          <input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
+        <button type="submit" className="btn btn-primary">Sign In</button>
       </form>
     </div>
   );

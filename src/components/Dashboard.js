@@ -1,11 +1,13 @@
 // src/components/Dashboard.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Line } from 'react-chartjs-2';
 
 const Dashboard = () => {
-  const [data, setData] = useState([]);
-  const [status, setStatus] = useState('');
+  const [temp1, setTemp1] = useState(0);
+  const [temp2, setTemp2] = useState(0);
+  const [humi1, setHumi1] = useState(0);
+  const [humi2, setHumi2] = useState(0);
+  const [status, setStatus] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,38 +15,69 @@ const Dashboard = () => {
         const response = await axios.get('/api/data', {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
-        setData(response.data);
-        setStatus(response.data.systemStatus ? 'On' : 'Off');
+        const data = response.data;
+        setTemp1(data.temp1);
+        setTemp2(data.temp2);
+        setHumi1(data.humi1);
+        setHumi2(data.humi2);
+        setStatus(data.systemstatus);
       } catch (error) {
-        console.error('Lỗi khi lấy dữ liệu:', error);
+        console.error('Error fetching data:', error);
       }
     };
     fetchData();
   }, []);
 
-  const tempData = {
-    labels: data.map(d => d.time),
-    datasets: [
-      {
-        label: 'Nhiệt độ 1',
-        data: data.map(d => d.temp1),
-        borderColor: 'rgba(255, 99, 132, 1)',
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      },
-      {
-        label: 'Nhiệt độ 2',
-        data: data.map(d => d.temp2),
-        borderColor: 'rgba(54, 162, 235, 1)',
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-      },
-    ],
-  };
-
   return (
     <div className="container">
       <h2>Dashboard</h2>
-      <div>Trạng thái: {status}</div>
-      <Line data={tempData} />
+      <div className="row">
+        <div className="col">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">Temperature 1</h5>
+              <p className="card-text">{temp1} °C</p>
+            </div>
+          </div>
+        </div>
+        <div className="col">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">Temperature 2</h5>
+              <p className="card-text">{temp2} °C</p>
+            </div>
+          </div>
+        </div>
+        <div className="col">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">Humidity 1</h5>
+              <p className="card-text">{humi1} %</p>
+            </div>
+          </div>
+        </div>
+        <div className="col">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">Humidity 2</h5>
+              <p className="card-text">{humi2} %</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row mt-4">
+        <div className="col">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">System Status</h5>
+              <p className="card-text">{status === 1 ? 'ON' : 'OFF'}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row mt-4">
+        {/* Line charts here */}
+      </div>
     </div>
   );
 };

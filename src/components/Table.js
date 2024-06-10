@@ -14,7 +14,7 @@ const Tables = () => {
         });
         setData(response.data);
       } catch (error) {
-        console.error('Lỗi khi lấy dữ liệu:', error);
+        console.error('Error fetching data:', error);
       }
     };
     fetchData();
