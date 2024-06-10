@@ -1,12 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import Table from './components/Table';
 import Contact from './components/Contact';
-import Login from './components/Login';
-import Register from './components/Register';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
+import Profile from './components/Profile';
 
 function App() {
+  const isLoggedIn = !!localStorage.getItem('token');
+
   return (
     <Router>
       <div>
@@ -26,23 +29,39 @@ function App() {
               <li className="nav-item">
                 <a className="nav-link" href="/contact">Contact</a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/login">Sign In</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/register">Register</a>
-              </li>
+              {!isLoggedIn && (
+                <>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/signin">Sign In</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/signup">Sign Up</a>
+                  </li>
+                </>
+              )}
+              {isLoggedIn && (
+                <li className="nav-item">
+                  <a className="nav-link" href="/profile">Profile</a>
+                </li>
+              )}
             </ul>
           </div>
         </nav>
 
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/table" element={<Table />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
+        <Switch>
+          <Route path="/" exact component={Dashboard} />
+          <Route path="/table" component={Table} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/signin">
+            {isLoggedIn ? <Redirect to="/" /> : <SignIn />}
+          </Route>
+          <Route path="/signup">
+            {isLoggedIn ? <Redirect to="/" /> : <SignUp />}
+          </Route>
+          <Route path="/profile">
+            {isLoggedIn ? <Profile /> : <Redirect to="/signin" />}
+          </Route>
+        </Switch>
       </div>
     </Router>
   );

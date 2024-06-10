@@ -3,55 +3,57 @@ import axios from 'axios';
 
 function Table() {
   const [data, setData] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get('/api/data', {
+          headers: { Authorization: token }
+        });
+        setData(response.data.data);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setError('Failed to fetch data');
+      }
+    };
+
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('https://my-backend-project-zqps.onrender.com/data');
-      setData(response.data.data);
-    } catch (err) {
-      console.error('Error fetching data:', err);
-    }
-  };
-
   return (
     <div className="container">
-      <h1 className="text-center my-4">Data Table</h1>
+      <h1>Data Table</h1>
+      {error && <div className="alert alert-danger">{error}</div>}
       <table className="table table-striped">
         <thead>
           <tr>
             <th>ID</th>
-            <th>Temp</th>
-            <th>Humi</th>
-            <th>Temp1</th>
-            <th>Humi1</th>
-            <th>Temp2</th>
-            <th>Humi2</th>
-            <th>Temp3</th>
-            <th>Humi3</th>
-            <th>System Status</th>
+            <th>Temperature</th>
+            <th>Humidity</th>
+            <th>Temperature 1</th>
+            <th>Humidity 1</th>
+            <th>Temperature 2</th>
+            <th>Humidity 2</th>
+            <th>Temperature 3</th>
+            <th>Humidity 3</th>
             <th>Time</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.temp}</td>
-              <td>{item.humi}</td>
-              <td>{item.temp1}</td>
-              <td>{item.humi1}</td>
-              <td>{item.temp2}</td>
-              <td>{item.humi2}</td>
-              <td>{item.temp3}</td>
-              <td>{item.humi3}</td>
-              <td style={{ color: item.systemstatus ? 'red' : 'gray' }}>
-                {item.systemstatus ? 'System On' : 'System Off'}
-              </td>
-              <td>{item.time}</td>
+          {data.map(row => (
+            <tr key={row.id}>
+              <td>{row.id}</td>
+              <td>{row.temp}</td>
+              <td>{row.humi}</td>
+              <td>{row.temp1}</td>
+              <td>{row.humi1}</td>
+              <td>{row.temp2}</td>
+              <td>{row.humi2}</td>
+              <td>{row.temp3}</td>
+              <td>{row.humi3}</td>
+              <td>{row.time}</td>
             </tr>
           ))}
         </tbody>
