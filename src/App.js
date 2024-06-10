@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import Table from './components/Table';
 import Contact from './components/Contact';
@@ -36,13 +36,13 @@ function App() {
           </div>
         </nav>
 
-        <Switch>
-          <Route path="/" exact component={Dashboard} />
-          <Route path="/table" component={Table} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/table" element={<Table />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
       </div>
     </Router>
   );
