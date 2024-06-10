@@ -1,90 +1,52 @@
+// src/components/Dashboard.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-
-function Dashboard() {
+const Dashboard = () => {
   const [data, setData] = useState([]);
-  const [settings, setSettings] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseData = await axios.get('/api/data', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
+        const response = await axios.get('/api/data', {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
-        const responseSettings = await axios.get('/api/setting', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-
-        setData(responseData.data.data || []);
-        setSettings(responseSettings.data.settings || {});
-        setLoading(false);
+        setData(response.data);
+        setStatus(response.data.systemStatus ? 'On' : 'Off');
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Lỗi khi lấy dữ liệu:', error);
       }
     };
-
     fetchData();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const tempData = {
+    labels: data.map(d => d.time),
+    datasets: [
+      {
+        label: 'Nhiệt độ 1',
+        data: data.map(d => d.temp1),
+        borderColor: 'rgba(255, 99, 132, 1)',
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      },
+      {
+        label: 'Nhiệt độ 2',
+        data: data.map(d => d.temp2),
+        borderColor: 'rgba(54, 162, 235, 1)',
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      },
+    ],
+  };
 
   return (
-    <div className="container mt-5">
-      <h1>Dashboard</h1>
-      <div className="row">
-        {data.length > 0 ? (
-          data.map((item, index) => (
-            <div key={index} className="col-md-3 mb-3">
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">Temperature {index + 1}</h5>
-                  <p className="card-text">{item.temperature}</p>
-                </div>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div>No data available</div>
-        )}
-      </div>
-      <div className="row">
-        <div className="col-md-12">
-          <h3>Temperature Line Chart</h3>
-          <Line data={{
-            labels: data.map((item, index) => `Temp ${index + 1}`),
-            datasets: [
-              {
-                label: 'Temperature',
-                data: data.map(item => item.temperature),
-                borderColor: 'rgba(75,192,192,1)',
-                fill: false,
-              },
-            ],
-          }} />
-        </div>
-      </div>
+    <div className="container">
+      <h2>Dashboard</h2>
+      <div>Trạng thái: {status}</div>
+      <Line data={tempData} />
     </div>
   );
-}
+};
 
 export default Dashboard;

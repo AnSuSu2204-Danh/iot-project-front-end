@@ -1,42 +1,31 @@
-import React from 'react';
+// src/components/Profile.js
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-function Profile() {
+const Profile = () => {
+  const [profile, setProfile] = useState({});
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get('/api/admin', {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        });
+        setProfile(response.data);
+      } catch (error) {
+        console.error('Lỗi khi lấy thông tin cá nhân:', error);
+      }
+    };
+    fetchProfile();
+  }, []);
+
   return (
-    <div className="container-fluid py-4">
-      <div className="row">
-        <div className="col-12">
-          <div className="card card-profile">
-            <img src="./assets/img/bg-profile.jpg" alt="Image placeholder" className="card-img-top" />
-            <div className="row justify-content-center">
-              <div className="col-4 col-lg-4 order-lg-2">
-                <div className="card-profile-image">
-                  <a href="#">
-                    <img src="./assets/img/team-4.jpg" className="rounded-circle" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="card-body mt-4 pt-0">
-              <div className="text-center">
-                <h5 className="h3">
-                  Jessica Jones<span className="font-weight-light">, 27</span>
-                </h5>
-                <div className="h5 font-weight-300">
-                  <i className="ni location_pin mr-2"></i>Bucharest, Romania
-                </div>
-                <div className="h5 mt-4">
-                  <i className="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
-                </div>
-                <div>
-                  <i className="ni education_hat mr-2"></i>University of Computer Science
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="container">
+      <h2>Thông Tin Cá Nhân</h2>
+      <p>Tên: {profile.name}</p>
+      <p>Email: {profile.email}</p>
     </div>
   );
-}
+};
 
 export default Profile;
